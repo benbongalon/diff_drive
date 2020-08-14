@@ -1,7 +1,7 @@
 from __future__ import division
 from math import pi, sin, cos
-from diff_drive.encoder import Encoder
-from diff_drive.pose import Pose
+from .encoder import Encoder
+from .pose import Pose
 
 class Odometry:
     """Keeps track of the current position and velocity of a
@@ -40,7 +40,7 @@ class Odometry:
         """
         leftTravel = self.leftEncoder.getDelta() / self.ticksPerMeter
         rightTravel = self.rightEncoder.getDelta() / self.ticksPerMeter
-        deltaTime = newTime - self.lastTime
+        deltaTimeSecs = (newTime - self.lastTime).nanoseconds / 1.e9
 
         deltaTravel = (rightTravel + leftTravel) / 2
         deltaTheta = (rightTravel - leftTravel) / self.wheelSeparation
@@ -66,14 +66,13 @@ class Odometry:
         self.pose.x += deltaX
         self.pose.y += deltaY
         self.pose.theta = (self.pose.theta + deltaTheta) % (2*pi)
-        self.pose.xVel = deltaTravel / deltaTime if deltaTime > 0 else 0.
+        self.pose.xVel = deltaTravel / deltaTimeSecs if deltaTimeSecs > 0.0 else 0.0
         self.pose.yVel = 0
-        self.pose.thetaVel = deltaTheta / deltaTime if deltaTime > 0 else 0.
-
+        self.pose.thetaVel = deltaTheta / deltaTimeSecs if deltaTimeSecs > 0.0 else 0.0
         self.lastTime = newTime
 
     def getPose(self):
-        return self.pose;
+        return self.pose
 
     def setPose(self, newPose):
         self.pose = newPose

@@ -1,7 +1,7 @@
 from __future__ import division, print_function
 from math import pi, sqrt, sin, cos, atan2
-from diff_drive.pose import Pose
-#import rospy
+from .pose import Pose
+
 
 class GoalController:
     """Finds linear and angular velocities necessary to drive toward

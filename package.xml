@@ -1,22 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<package format="2">
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>diff_drive</name>
-  <version>1.0.0</version>
+  <version>2.0.0</version>
   <description>
-    This package implements a control mechanism for a differential drive robot.
+    Controller for a differential drive robot.
+    ROS 2 port of diff_drive (https://github.com/merose/diff_drive)
   </description>
-  <author>Mark Rose</author>
-  <maintainer email="markrose@acm.org">Mark Rose</maintainer>
-  <url type="website">https://github.com/merose/diff_drive</url>
-  <url type="repository">https://github.com/merose/diff_drive.git</url>
-  <url type="bugtracker">https://github.com/merose/diff_drive/issues</url>
+  <maintainer email="ben.bongalon@gmail.com">Ben Bongalon</maintainer>
   <license>BSD</license>
-  <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>std_msgs</depend>
-  <depend>geometry_msgs</depend>
-  <depend>actionlib_msgs</depend>
-  <build_depend>rostest</build_depend>
-  <depend>message_generation</depend>
-  
+  <depend>rclpy</depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
 </package>
